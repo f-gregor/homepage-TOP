@@ -1,2 +1,3 @@
-# homepage-TOP
-Homepage assignment for The Odin Project
+# **Homepage - The Odin Project**
+
+Homepage assignment for The Odin Project.
