@@ -33,14 +33,12 @@ body {
 }
 
 header,
-main,
 footer {
   display: flex;
   justify-content: center;
 }
 
 main {
-  flex: 1;
   margin-top: 50px;
 }
 
@@ -51,14 +49,33 @@ footer {
 .tilted {
   height: 400px;
   width: 100vw;
-  transform: translateY(-50%) skewY(-5deg);
+  transform: translateY(-50%) skewY(-10deg);
   position: absolute;
   z-index: -1;
 }
 
 .wrapper {
-  flex: 1;
-  max-width: 1200px;
+  grid-column: 2;
+}
+
+header,
+main {
+  display: grid;
+  grid-template-columns: 1fr 360px 1fr;
+}
+
+@media (min-width: 820px) {
+  header,
+  main {
+    grid-template-columns: 1fr 760px 1fr;
+  }
+}
+
+@media (min-width: 1220px) {
+  header,
+  main {
+    grid-template-columns: 1fr 1160px 1fr;
+  }
 }
 
 /* Shadows */
@@ -79,24 +96,24 @@ header > .wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .about {
-  padding: 40px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   background-color: white;
-  max-width: 600px;
   font-size: 1.5rem;
+  line-height: 1.5;
 }
 
 header .image {
-  position: relative;
-  z-index: 1;
-  height: 500px;
-  width: 400px;
+  height: 400px;
+  width: 360px;
   background-color: black;
+  position: relative;
 }
 
 .links {
@@ -104,19 +121,89 @@ header .image {
   gap: 10px;
 }
 
-.about > .links {
-  align-self: flex-end;
+@media (max-width: 820px) {
+  .about {
+    margin-top: 40px;
+    box-shadow: none;
+    text-align: center;
+  }
+}
+
+@media (min-width: 820px) and (max-width: 1220px) {
+  header .wrapper {
+    position: relative;
+    display: block;
+    height: 500px;
+  }
+
+  .about > .links {
+    display: none;
+    align-self: flex-end;
+  }
+
+  .about {
+    margin-left: 160px;
+    margin-top: 100px;
+    display: block;
+    padding: 40px;
+    align-items: flex-start;
+    width: 600px;
+  }
+
+  header .image {
+    float: left;
+    margin-right: 20px;
+    margin-right: 20px;
+  }
+
+  .name {
+    top: 5%;
+    left: 70%;
+  }
+
+  .about h2 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1220px) {
+  .about > .links {
+    align-self: flex-end;
+  }
+
+  .about {
+    max-width: 720px;
+    padding: 40px;
+    padding-left: 20px;
+  }
+
+  header .image {
+    width: 500px;
+    height: 600px;
+  }
+
+  header .wrapper {
+    flex-direction: row;
+  }
 }
 
 .name {
   color: white;
-  position: relative;
+  position: absolute;
+  bottom: 0px;
+  width: inherit;
   text-align: center;
-  top: 85%;
   font-size: 2.5rem;
+  text-shadow: 2px 2px hsl(0deg, 0%, 0%, 0.2);
 }
 
 /* Main */
+
+main > * {
+  grid-column: 2;
+}
 
 main h2 {
   margin-bottom: 20px;
@@ -139,17 +226,28 @@ main h2 {
   padding: 20px;
 }
 
-/* .card-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-} */
-
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 820px) {
+  main h2 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 820px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1220px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .card-header {
@@ -201,31 +299,78 @@ p {
 
 /* Footer */
 
+footer .wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+@media (min-width: 820px) {
+  footer {
+    display: grid;
+    grid-template-columns: 1fr 760px, 1fr;
+  }
+
+  footer .wrapper {
+    width: 760px;
+    grid-column: 2;
+    flex-direction: row;
+    padding-bottom: 40px;
+  }
+
+  footer .image {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1220px) {
+  footer {
+    display: grid;
+    grid-template-columns: 1fr 1160px, 1fr;
+  }
+
+  footer .wrapper {
+    width: 1160px;
+  }
+}
+
+@media (max-width: 820px) {
+  footer p {
+    text-align: center;
+  }
+
+  .contacts {
+    align-self: center;
+    align-items: center;
+  }
+
+  footer .image {
+    min-height: 400px;
+  }
+}
+
 footer,
 footer p {
   color: white;
 }
 
+footer {
+  padding-top: 40px;
+}
+
 .contacts {
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 400px;
 }
 
 .contacts > .links {
   gap: 20px;
 }
 
-footer .wrapper {
-  display: flex;
-  gap: 50px;
-  justify-content: space-between;
-  padding: 50px 0px;
-}
-
 footer .image {
-  flex: 1;
   background-color: black;
 }
 
